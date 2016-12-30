@@ -23,6 +23,9 @@
 	 If you have any problems with or questions
 	 about this script, please contact me via the 
 	 official SA-MP forums or on GitHub.
+	 
+	 GitHub URL:
+	 https://github.com/Basssiiie/Advanced-Fireworks
 
 	Regards,
 	 Basssiiie
