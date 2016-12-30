@@ -69,11 +69,6 @@
 // Includes
 #define FILTERSCRIPT
 #include <a_samp>
-#tryinclude <foreach>
-
-#if !defined _FOREACH_LOCAL_VERSION
-	#define foreach%1(%1new%2:%1Player%1) for(new%2,maxp=GetMaxPlayers();%2<maxp;%2++)if(IsPlayerConnected(%2)&&!IsPlayerNPC(%2))
-#endif
 
 #if USE_STREAMER == true
 	#include <streamer>
@@ -161,10 +156,13 @@ public OnFilterScriptInit()
 	AddMenuItem(FWColor, 0, "Blue");
 	
 	// Load the animation library for all online player
-	foreach(new p: Player)
+	for (new p = 0, mp = GetPlayerPoolSize(); p <= mp; p++)
 	{
 		ApplyAnimation(p, "BOMBER", "null", 0.0, 0, 0 , 0, 0, 0);
 	}
+	
+	print("\n");
+	print("Advanced Fireworks v1.0 loaded succesfully.\n");
 	return 1;
 }
 
@@ -421,7 +419,7 @@ public OnDynamicObjectMoved(objectid)
 										}
 									}
 									
-									foreach(new i: Player)
+									for (new i = 0, mp = GetPlayerPoolSize(); i <= mp; i++)
 									{
 										if(IsPlayerInRangeOfPoint(i,50,fwX, fwY, fwZ))
 										{
@@ -466,13 +464,15 @@ public OnDynamicObjectMoved(objectid)
 											}
 										}
 									}
-									foreach(new i: Player)
+									
+									for (new i = 0, mp = GetPlayerPoolSize(); i <= mp; i++)
 									{
 										if(IsPlayerInRangeOfPoint(i,50,fwX, fwY, fwZ))
 										{
 											PlayerPlaySound(i, 1009, 0, 0, 0);
 										}
 									}
+									
 									DestroyDynamicObject(FW_Object[fw][fo][0]);
 									FW_Object[fw][fo][0] = 0;
 									FW_Object[fw][fo][1] = 0;
@@ -497,13 +497,15 @@ public OnDynamicObjectMoved(objectid)
 											}
 										}
 									}
-									foreach(new i: Player)
+									
+									for (new i = 0, mp = GetPlayerPoolSize(); i <= mp; i++)
 									{
 										if(IsPlayerInRangeOfPoint(i,50,fwX, fwY, fwZ))
 										{
 											PlayerPlaySound(i, 1009, 0, 0, 0);
 										}
 									}
+									
 									DestroyDynamicObject(FW_Object[fw][fo][0]);
 									FW_Object[fw][fo][0] = 0;
 									FW_Object[fw][fo][1] = 0;
@@ -543,13 +545,15 @@ public OnDynamicObjectMoved(objectid)
 											}
 										}
 									}
-									foreach(new i: Player)
+									
+									for (new i = 0, mp = GetPlayerPoolSize(); i <= mp; i++)
 									{
 										if(IsPlayerInRangeOfPoint(i,50,fwX, fwY, fwZ))
 										{
 											PlayerPlaySound(i, 1009, 0, 0, 0);
 										}
 									}
+									
 									DestroyDynamicObject(FW_Object[fw][fo][0]);
 									FW_Object[fw][fo][0] = 0;
 									FW_Object[fw][fo][1] = 0;
@@ -582,13 +586,15 @@ public OnDynamicObjectMoved(objectid)
 											}
 										}
 									}
-									foreach(new i: Player)
+									
+									for (new i = 0, mp = GetPlayerPoolSize(); i <= mp; i++)
 									{
 										if(IsPlayerInRangeOfPoint(i,50,fwX, fwY, fwZ))
 										{
 											PlayerPlaySound(i, 1009, 0, 0, 0);
 										}
 									}
+									
 									DestroyDynamicObject(FW_Object[fw][fo][0]);
 									FW_Object[fw][fo][0] = 0;
 									FW_Object[fw][fo][1] = 0;
@@ -732,13 +738,15 @@ public FW_MainFire(playerid)
 					FW_Stage[fw] = 2;
 					new Float: fwX, Float: fwY, Float: fwZ;
 					GetDynamicObjectPos(FW_Object[fw][0][0], fwX, fwY, fwZ);
-					foreach(new i: Player)
+					
+					for (new i = 0, mp = GetPlayerPoolSize(); i <= mp; i++)
 					{
 						if(IsPlayerInRangeOfPoint(i,50, fwX, fwY, fwZ))
 						{
 							PlayerPlaySound(i, 1134, 0, 0, 0);
 						}
 					}
+					
 					SetTimerEx("FW_FountainFire", FOUNTAIN_DELAY, false, "ii", fw, 0);
 					return 1;
 				}
@@ -933,7 +941,7 @@ public FW_RocketFire(fw)
 	}
 	#endif
 
-	foreach(new i: Player)
+	for (new i = 0, mp = GetPlayerPoolSize(); i <= mp; i++)
 	{
 		if(IsPlayerInRangeOfPoint(i,50,fwX, fwY, fwZ))
 		{
@@ -996,6 +1004,7 @@ public FW_SplitterFire(fw)
 	DestroyDynamicObject(FW_Object[fw][3][0]);
 	new Float: fwX, Float: fwY, Float: fwZ, Float: R;
 	if (FW_AttachedVehicle[fw] == -1) {GetDynamicObjectPos(FW_Object[fw][1][0], fwX, fwY, fwZ);}
+	
 	#if USE_STREAMER == true
 	else
 	{
@@ -1009,19 +1018,23 @@ public FW_SplitterFire(fw)
 		fwZ += AttachOffset[2];
 	}
 	#endif
-	foreach(new i: Player)
+	
+	for (new i = 0, mp = GetPlayerPoolSize(); i <= mp; i++)
 	{
 		if(IsPlayerInRangeOfPoint(i,50,fwX, fwY, fwZ))
 		{
 			PlayerPlaySound(i, 1095, 0, 0, 0);
 		}
 	}
+	
 	DestroyDynamicObject(FW_Object[fw][1][0]);
+	
 	#if USE_STREAMER == true
 	Streamer_GetFloatData(0, FW_Object[fw][0][0], E_STREAMER_R_Z, R);
 	#else
 	GetObjectRot(FW_Object[fw][0][0], R, R, R);
 	#endif
+	
 	FW_Object[fw][1][0] = CreateDynamicObject(3786, fwX, fwY, fwZ+0.95, 0.0, 90.0, R, -1, 0, -1, 300.0);
 	FW_Object[fw][2][0] = CreateDynamicObject(345, fwX, fwY, fwZ-1.2, 90.0, 0.0, 0.0, -1, 0, -1, 300.0);
 	fwX += (float(random(30))/10);
@@ -1072,6 +1085,7 @@ public FW_UmbrelllaFire(fw)
 	DestroyDynamicObject(FW_Object[fw][3][0]);
 	new Float: fwX, Float: fwY, Float: fwZ, Float: R;
 	if (FW_AttachedVehicle[fw] == -1) {GetDynamicObjectPos(FW_Object[fw][1][0], fwX, fwY, fwZ);}
+	
 	#if USE_STREAMER == true
 	else
 	{
@@ -1086,19 +1100,22 @@ public FW_UmbrelllaFire(fw)
 	}
 	#endif
 
-	foreach(new i: Player)
+	for (new i = 0, mp = GetPlayerPoolSize(); i <= mp; i++)
 	{
 		if(IsPlayerInRangeOfPoint(i,50,fwX, fwY, fwZ))
 		{
 			PlayerPlaySound(i, 1095, 0, 0, 0);
 		}
 	}
+	
 	DestroyDynamicObject(FW_Object[fw][1][0]);
+	
 	#if USE_STREAMER == true
 	Streamer_GetFloatData(0, FW_Object[fw][0][0], E_STREAMER_R_Z, R);
 	#else
 	GetObjectRot(FW_Object[fw][0][0], R, R, R);
 	#endif
+	
 	FW_Object[fw][1][0] = CreateDynamicObject(3790, fwX, fwY, fwZ+0.95, 0.0, 90.0, R, -1, 0, -1, 100.0);
 	FW_Object[fw][2][0] = CreateDynamicObject(345, fwX, fwY, fwZ-1.2, 90.0, 0.0, 0.0, -1, 0, -1, 300.0);
 	fwX += (float(random(30))/10);
@@ -1163,6 +1180,7 @@ public FW_CakeFire(fw, stage)
 			{
 				new Float: fwX, Float: fwY, Float: fwZ, Float: fwU, Float: fwR;
 				if (FW_AttachedVehicle[fw] == -1) {GetDynamicObjectPos(FW_Object[fw][1][0], fwX, fwY, fwZ);}
+				
 				#if USE_STREAMER == true
 				else
 				{
@@ -1176,14 +1194,17 @@ public FW_CakeFire(fw, stage)
 					fwZ += AttachOffset[2];
 				}
 				#endif
+				
 				GetDynamicObjectRot(FW_Object[fw][0][0], fwU, fwU, fwR);
-				foreach(new i: Player)
+				
+				for (new i = 0, mp = GetPlayerPoolSize(); i <= mp; i++)
 				{
 					if(IsPlayerInRangeOfPoint(i,50,fwX, fwY, fwZ))
 					{
 						PlayerPlaySound(i, 1095, 0, 0, 0);
 					}
 				}
+				
 				FW_Object[fw][fo][0] = CreateDynamicObject(FW_Colors[fw][0], fwX, fwY, fwZ-0.5, 0.0, 0.0, 0.0, -1, 0, -1, 300.0);
 				switch (stage)
 				{
@@ -1232,7 +1253,7 @@ public FW_CakeFire(fw, stage)
 stock UpdateStreamerForAll()
 {
 	#if USE_STREAMER == true
-	foreach (new p: Player)
+	for (new p = 0, mp = GetPlayerPoolSize(); p <= mp; p++)
 	{
 		Streamer_Update(p);
 	}
