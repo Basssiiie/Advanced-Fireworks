@@ -1,6 +1,6 @@
 /*
-     // - - - - - - - - - - - - - - //
-    //   Advanced Fireworks v1.0   //
+	 // - - - - - - - - - - - - - - //
+	//   Advanced Fireworks v1.0   //
    // - - - - - - - - - - - - - - // 
 
 	Description:
@@ -139,13 +139,13 @@ new Menu: FWSize;
 public OnFilterScriptInit()
 {
 	// Create the fireworks menus
-    MenuFireworkLighting = CreateMenu("Firework", 1, 150, 300,1000,35);
-    AddMenuItem(MenuFireworkLighting, 0, "Fountain");
-    AddMenuItem(MenuFireworkLighting, 0, "Rocket");
+	MenuFireworkLighting = CreateMenu("Firework", 1, 150, 300,1000,35);
+	AddMenuItem(MenuFireworkLighting, 0, "Fountain");
+	AddMenuItem(MenuFireworkLighting, 0, "Rocket");
 	AddMenuItem(MenuFireworkLighting, 0, "Splitter");
-    AddMenuItem(MenuFireworkLighting, 0, "Umbrella");
-    AddMenuItem(MenuFireworkLighting, 0, "Cake");
-    FWSize = CreateMenu("Firework effects", 1, 150, 300, 500, 0);
+	AddMenuItem(MenuFireworkLighting, 0, "Umbrella");
+	AddMenuItem(MenuFireworkLighting, 0, "Cake");
+	FWSize = CreateMenu("Firework effects", 1, 150, 300, 500, 0);
 	SetMenuColumnHeader(FWSize, 0, "Choose the size of the effects..");
 	AddMenuItem(FWSize, 0, "Small");
 	AddMenuItem(FWSize, 0, "Big");
@@ -169,8 +169,8 @@ public OnFilterScriptInit()
 public OnPlayerConnect(playerid)
 {
 	// Load the animation library for new connecting players
-    ApplyAnimation(playerid, "BOMBER", "null", 0.0, 0, 0 , 0, 0, 0);
-    return 1;
+	ApplyAnimation(playerid, "BOMBER", "null", 0.0, 0, 0 , 0, 0, 0);
+	return 1;
 }
 
 public OnPlayerDisconnect(playerid, reason)
@@ -179,9 +179,9 @@ public OnPlayerDisconnect(playerid, reason)
 	{
 		for (new fw; fw != MAX_FIREWORK; fw++)
 		{
-		    if (FW_Owner[fw] == playerid && FW_Stage[fw] <= 1)
-		    {
-		        FW_MainDestroy(fw);
+			if (FW_Owner[fw] == playerid && FW_Stage[fw] <= 1)
+			{
+				FW_MainDestroy(fw);
 			}
 		}
 	}
@@ -196,7 +196,7 @@ public OnPlayerCommandText(playerid, cmdtext[])
 	
 	if (!strcmp(cmdtext, "/firework") || !strcmp(cmdtext, "/fireworks"))
 	{
-	    ShowMenuForPlayer(MenuFireworkLighting, playerid);
+		ShowMenuForPlayer(MenuFireworkLighting, playerid);
 		TogglePlayerControllable(playerid, 0);
 		return 1;
 	}
@@ -206,13 +206,13 @@ public OnPlayerCommandText(playerid, cmdtext[])
 public OnPlayerSelectedMenuRow(playerid, row)
 {
 	new Menu: Current = GetPlayerMenu(playerid);
-    if (Current == MenuFireworkLighting)
+	if (Current == MenuFireworkLighting)
 	{
-	    switch (row)
-	    {
-	        case 0:
+		switch (row)
+		{
+			case 0:
 			{
-			    SetPVarInt(playerid, "FW_ColorsNumber", 2);
+				SetPVarInt(playerid, "FW_ColorsNumber", 2);
 				SetPVarInt(playerid, "FW_MenuItem", FW_FOUNTAIN);
 				ShowMenuForPlayer(FWSize, playerid);
 			}
@@ -230,25 +230,25 @@ public OnPlayerSelectedMenuRow(playerid, row)
 			}
 			case 3:
 			{
-			    SetPVarInt(playerid, "FW_ColorsNumber", 2);
+				SetPVarInt(playerid, "FW_ColorsNumber", 2);
 				SetPVarInt(playerid, "FW_MenuItem", FW_UMBRELLA);
 				ShowMenuForPlayer(FWSize, playerid);
 			}
 			case 4:
 			{
-			    SetPVarInt(playerid, "FW_ColorsNumber", 2);
+				SetPVarInt(playerid, "FW_ColorsNumber", 2);
 				SetPVarInt(playerid, "FW_MenuItem", FW_CAKE);
 				ShowMenuForPlayer(FWSize, playerid);
 			}
 			default: ShowMenuForPlayer(Current, playerid);
 		}
-	    return 1;
+		return 1;
 	}
 	if (Current == FWSize)
 	{
 		switch (row)
 		{
-		    case 0: {SetPVarInt(playerid, "FW_Big", 0);}
+			case 0: {SetPVarInt(playerid, "FW_Big", 0);}
 			case 1: {SetPVarInt(playerid, "FW_Big", 1);}
 		}
 		SetMenuColumnHeader(FWColor, 0, "Choose the first color..");
@@ -257,18 +257,18 @@ public OnPlayerSelectedMenuRow(playerid, row)
 	}
 	if (Current == FWColor)
 	{
-	    if (!GetPVarInt(playerid, "FW_Color1") && !GetPVarInt(playerid, "FW_Color2"))
-	    {
+		if (!GetPVarInt(playerid, "FW_Color1") && !GetPVarInt(playerid, "FW_Color2"))
+		{
 			switch (row)
 			{
-			    case 0: {if (GetPVarInt(playerid, "FW_Big") == 1) {SetPVarInt(playerid, "FW_Color1", 19295);} else {SetPVarInt(playerid, "FW_Color1", 19281);}} // Wit
-			    case 1: {if (GetPVarInt(playerid, "FW_Big") == 1) {SetPVarInt(playerid, "FW_Color1", 19296);} else {SetPVarInt(playerid, "FW_Color1", 19282);}} // Rood
-			    case 2: {if (GetPVarInt(playerid, "FW_Big") == 1) {SetPVarInt(playerid, "FW_Color1", 19297);} else {SetPVarInt(playerid, "FW_Color1", 19283);}} // Groen
-			    case 3: {if (GetPVarInt(playerid, "FW_Big") == 1) {SetPVarInt(playerid, "FW_Color1", 19298);} else {SetPVarInt(playerid, "FW_Color1", 19284);}} // Blauw
+				case 0: {if (GetPVarInt(playerid, "FW_Big") == 1) {SetPVarInt(playerid, "FW_Color1", 19295);} else {SetPVarInt(playerid, "FW_Color1", 19281);}} // Wit
+				case 1: {if (GetPVarInt(playerid, "FW_Big") == 1) {SetPVarInt(playerid, "FW_Color1", 19296);} else {SetPVarInt(playerid, "FW_Color1", 19282);}} // Rood
+				case 2: {if (GetPVarInt(playerid, "FW_Big") == 1) {SetPVarInt(playerid, "FW_Color1", 19297);} else {SetPVarInt(playerid, "FW_Color1", 19283);}} // Groen
+				case 3: {if (GetPVarInt(playerid, "FW_Big") == 1) {SetPVarInt(playerid, "FW_Color1", 19298);} else {SetPVarInt(playerid, "FW_Color1", 19284);}} // Blauw
 			}
 			if (GetPVarInt(playerid, "FW_ColorsNumber") == 1)
 			{
-			    DeletePVar(playerid, "FW_Big");
+				DeletePVar(playerid, "FW_Big");
 				TogglePlayerControllable(playerid, 1);
 				FW_MainCreate(playerid, GetPVarInt(playerid, "FW_MenuItem"));
 				return 1;
@@ -278,13 +278,13 @@ public OnPlayerSelectedMenuRow(playerid, row)
 			return 1;
 		}
 		if (GetPVarInt(playerid, "FW_Color1") > 1 && !GetPVarInt(playerid, "FW_Color2"))
-	    {
+		{
 			switch (row)
 			{
-			    case 0: {if (GetPVarInt(playerid, "FW_Big") == 1) {SetPVarInt(playerid, "FW_Color2", 19295);} else {SetPVarInt(playerid, "FW_Color2", 19281);}} 
-			    case 1: {if (GetPVarInt(playerid, "FW_Big") == 1) {SetPVarInt(playerid, "FW_Color2", 19296);} else {SetPVarInt(playerid, "FW_Color2", 19282);}} 
-			    case 2: {if (GetPVarInt(playerid, "FW_Big") == 1) {SetPVarInt(playerid, "FW_Color2", 19297);} else {SetPVarInt(playerid, "FW_Color2", 19283);}} 
-			    case 3: {if (GetPVarInt(playerid, "FW_Big") == 1) {SetPVarInt(playerid, "FW_Color2", 19298);} else {SetPVarInt(playerid, "FW_Color2", 19284);}} 
+				case 0: {if (GetPVarInt(playerid, "FW_Big") == 1) {SetPVarInt(playerid, "FW_Color2", 19295);} else {SetPVarInt(playerid, "FW_Color2", 19281);}} 
+				case 1: {if (GetPVarInt(playerid, "FW_Big") == 1) {SetPVarInt(playerid, "FW_Color2", 19296);} else {SetPVarInt(playerid, "FW_Color2", 19282);}} 
+				case 2: {if (GetPVarInt(playerid, "FW_Big") == 1) {SetPVarInt(playerid, "FW_Color2", 19297);} else {SetPVarInt(playerid, "FW_Color2", 19283);}} 
+				case 3: {if (GetPVarInt(playerid, "FW_Big") == 1) {SetPVarInt(playerid, "FW_Color2", 19298);} else {SetPVarInt(playerid, "FW_Color2", 19284);}} 
 			}
 			TogglePlayerControllable(playerid, 1);
 			FW_MainCreate(playerid, GetPVarInt(playerid, "FW_MenuItem"));
@@ -308,13 +308,13 @@ public OnPlayerExitedMenu(playerid)
 	}
 	if (Current == FWColor)
 	{
-	    TogglePlayerControllable(playerid, 1);
+		TogglePlayerControllable(playerid, 1);
 		DeletePVar(playerid, "FW_Color1");
 		DeletePVar(playerid, "FW_Color2");
 		DeletePVar(playerid, "FW_MenuItem");
 		DeletePVar(playerid, "FW_ColorsNumber");
 		DeletePVar(playerid, "FW_Big");
-	    return 1;
+		return 1;
 	}
 	return 1;
 }
@@ -341,8 +341,8 @@ public OnPlayerUpdate(playerid)
 {
 	if (GetPlayerWeapon(playerid) == 40)
 	{
-	    if (GetPVarInt(playerid, "Detonator") != 1)
-	    {
+		if (GetPVarInt(playerid, "Detonator") != 1)
+		{
 			SetPVarInt(playerid, "Detonator", 1);
 		}
 	}
@@ -1317,7 +1317,7 @@ stock Get3DRandomDistanceAway(&Float: fwX, &Float: fwY, &Float: fwZ, min_distanc
 
 stock GetDistance(Float:x1, Float:y1, Float:z1, Float:x2, Float:y2, Float:z2)
 {
-    return floatround(floatsqroot((( x1 - x2 ) * ( x1 - x2 )) + (( y1 - y2 ) * ( y1 - y2 )) + (( z1 - z2 ) * ( z1 - z2 ))));
+	return floatround(floatsqroot((( x1 - x2 ) * ( x1 - x2 )) + (( y1 - y2 ) * ( y1 - y2 )) + (( z1 - z2 ) * ( z1 - z2 ))));
 }
 	
 
