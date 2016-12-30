@@ -16,6 +16,8 @@ To see the script in action, you can watch this video from 2011: https://www.you
 
 **Step 3:** Add `AdvancedFireworks` to your `filterscripts` line in the `server.cfg` file, which is located in your main server folder.
 
+**Step 4:** Start or restart your server. The script should now be available for use.
+
 ## Commands
 | Command | Effect |
 | --- | --- |
