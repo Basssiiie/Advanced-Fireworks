@@ -1,6 +1,6 @@
 # Advanced Fireworks
 
-###[CLICK HERE TO DOWNLOAD THE LATEST RELEASE.](https://github.com/Basssiiie/Advanced-Fireworks/releases)
+### [CLICK HERE TO DOWNLOAD THE LATEST RELEASE.](https://github.com/Basssiiie/Advanced-Fireworks/releases)
 
 This is a small SA-MP script that allows players to spawn and fire fireworks in the server.
 
