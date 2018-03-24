@@ -2,7 +2,7 @@
 
 ### [CLICK HERE TO DOWNLOAD THE LATEST RELEASE.](https://github.com/Basssiiie/Advanced-Fireworks/releases)
 
-This is a small SA-MP script that allows players to spawn and fire fireworks in the server.
+This is a small SA-MP script that allows players to spawn and fire fireworks in the server. Feel free to submit pull requests if you feel like it should have updates.
 
 This script "requires" the Streamer Plugin, which you can download **[here](http://forum.sa-mp.com/showthread.php?t=102865)**. If you really don't want to use the Streamer Plugin, you can download the source code and set the `USE_STREAMER` value to `false`. Recompile it and the script will use the default SA-MP functions. 
 
